@@ -2,16 +2,17 @@
 import AsyncSelect from 'react-select/async';
 import {components} from 'react-select';
 import {AiFillFlag} from 'react-icons/ai';
+const FALLBACK_FLAG = 'https://i.redd.it/duiz6eq80q651.png';
 // option for react select which display flag image alongside country name
 function Option(props) {
   // load default image if error 
   const onError = (e) => {
-    e.target.src = 'https://i.redd.it/duiz6eq80q651.png';
+    e.target.src = FALLBACK_FLAG;
   }
   return (
     <components.Option {...props}>
       <span className='flex'>
-      <img src={props.data.value} onError={onError} alt={props.data.label} className="w-4 mr-2" />
+      <img src={props.data.value ?? FALLBACK_FLAG} onError={onError} className="w-4 mr-2" />
       {props.data.label}
       </span>
     </components.Option>
@@ -21,12 +22,12 @@ function Option(props) {
 // multi value component for react select which display flag image alongside country name
 function MultiValue(props) {
   const onError = (e) => {
-    e.target.src = 'https://i.redd.it/duiz6eq80q651.png';
+    e.target.src = FALLBACK_FLAG;
   }
   return (
     <components.MultiValue {...props}>
       <span className='flex'>
-      <img src={props.data.value} alt={props.data.label} onError={onError} className="w-5 mr-2" />
+      <img src={props.data.value ?? FALLBACK_FLAG} onError={onError} className="w-5 mr-2" />
       {props.data.label}
       </span>
     </components.MultiValue>
